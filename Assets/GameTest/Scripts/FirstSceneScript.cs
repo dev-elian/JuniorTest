@@ -3,20 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using Doublsb.Dialog;
 using System;
-public static class PlayerEmotions {
-    public const string FRIENDLY = "Friendly";
-    public const string HOSTILE = "Hostile";
-    public const string SARCASTIC = "Sarcastic";
-    public const string POSITIVE = "Positive";
-    public const string FEARFUL = "Fearful";
-    public const string NEGATIVE = "Negative";
-}
 public class FirstSceneScript : MonoBehaviour
 {
-    public DialogManager DialogManager;
+    [SerializeField] DialogManager _dialogManager;
 
-    private void Awake()
+    void Awake()
     {
+        ShowFirstDialogsGroup();
+    }
+
+    void ShowFirstDialogsGroup() {
         var dialogTexts = new List<DialogData>();
         dialogTexts.Add(new DialogData("Wow, go! Another insignificant human who wants to talk to me.", "Bender"));
         var firstSelection = new DialogData("What brings you here?");
@@ -25,11 +21,10 @@ public class FirstSceneScript : MonoBehaviour
         firstSelection.SelectList.Add(PlayerEmotions.SARCASTIC, "C) Are you the famous Bender? I thought you would be brighter ... literally.");
         firstSelection.Callback = () => OnFirstSelectionResult();
         dialogTexts.Add(firstSelection);
-        DialogManager.Show(dialogTexts);
+        _dialogManager.Show(dialogTexts);
     }
-
     void OnFirstSelectionResult() {
-        switch (DialogManager.Result) {
+        switch (_dialogManager.Result) {
 
             case PlayerEmotions.FRIENDLY:
                 ShowDialog("I know, I know. I am the most amazing robot that has existed! Keep adulthood, I like it.", "Bender");
@@ -47,7 +42,7 @@ public class FirstSceneScript : MonoBehaviour
     }
 
     IEnumerator ShowSencondDialogsGroup() {
-        while (DialogManager.state != State.Deactivate) { yield return null; }
+        while (_dialogManager.state != State.Deactivate) { yield return null; }
         var dialogTexts = new List<DialogData>();
         dialogTexts.Add(new DialogData("Hey, meatbag! I just had a brilliant idea… and by brilliant, I mean completely illegal.", "Bender"));
         dialogTexts.Add(new DialogData("How about a little competition? You and I steal as much junk as we can from the old crackpot, and whoever gets the most loot wins. The prize? Everything we stole, of course!", "Bender"));
@@ -57,11 +52,10 @@ public class FirstSceneScript : MonoBehaviour
         secondSelection.SelectList.Add(PlayerEmotions.NEGATIVE, "C) That’s a crime, Bender!");
         secondSelection.Callback = () => OnSecondSelectionResult();
         dialogTexts.Add(secondSelection);
-        DialogManager.Show(dialogTexts);
+        _dialogManager.Show(dialogTexts);
     }
-
     void OnSecondSelectionResult() {
-        switch (DialogManager.Result) {
+        switch (_dialogManager.Result) {
 
             case PlayerEmotions.POSITIVE:
                 ShowDialog("/emote:Happy/ Ha! I like your attitude, rookie thief. But just so you know, I’m a pro.", "Bender");
@@ -75,37 +69,24 @@ public class FirstSceneScript : MonoBehaviour
             default:
                 break;
         }
+        StartCoroutine(ShowThirdDialogsGroup());
+    }
+
+    IEnumerator ShowThirdDialogsGroup() {
+        while (_dialogManager.state != State.Deactivate) { yield return null; }
+        var dialogTexts = new List<DialogData>();
+        dialogTexts.Add(new DialogData("Anyway, it doesn't matter what you choose, as I am a character of a video game, you will have to play with me anyway.", "Bender"));
+        dialogTexts.Add(new DialogData("Click the objects that appear on the screen as quickly as possible, if you think you are faster than me, human.", "Bender"));
+        _dialogManager.Show(dialogTexts);
+        StartCoroutine(GoToSecondScene());
+    }
+
+    IEnumerator GoToSecondScene() {
+        while (_dialogManager.state != State.Deactivate) { yield return null; }
+        GameManager.Instance.GoToNextScene();
     }
 
     void ShowDialog(string text, string character) {
-        DialogManager.Show(new DialogData(text, character));
+        _dialogManager.Show(new DialogData(text, character));
     }
 }
-
-        //dialogTexts.Add(new DialogData("/size:up/Hi, /size:init/my name is Li.", "Li"));
-
-        //dialogTexts.Add(new DialogData("Let's start this test!", "Li"));
-
-        //dialogTexts.Add(new DialogData("The idea is to create something very simple, make me react to the text and animate me in a few different ways.", "Li"));
-
-        //dialogTexts.Add(new DialogData("Remember that you can change my sprite or background if you choose so, you can even go 3D if you're more experienced with that!", "Li"));
-
-        //dialogTexts.Add(new DialogData("Anyways... Let's move on!", "Li"));
-
-        //dialogTexts.Add(new DialogData("Create a branching option where you have to choose between 3 possible answers to give me.", "Li"));
-
-        //dialogTexts.Add(new DialogData("Once you create the options and pick one of them I'll say: ", "Li"));
-
-        //dialogTexts.Add(new DialogData("Yo choose option A!", "Li"));
-
-        //dialogTexts.Add(new DialogData("Or...", "Li"));
-
-        //dialogTexts.Add(new DialogData("Yo choose option B!", "Li"));
-
-        //dialogTexts.Add(new DialogData("Or...", "Li"));
-
-        //dialogTexts.Add(new DialogData("Yo choose option C!", "Li"));
-
-        //dialogTexts.Add(new DialogData("After this, you'll send me to the SecondScene!", "Li"));
-
-        //dialogTexts.Add(new DialogData("Where you'll have to create a VERY simple mini game and make me react to it.", "Li"));
