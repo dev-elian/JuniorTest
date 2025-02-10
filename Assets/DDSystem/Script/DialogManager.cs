@@ -28,6 +28,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using TMPro;
 
 namespace Doublsb.Dialog
 {
@@ -41,7 +42,7 @@ namespace Doublsb.Dialog
         public GameObject Characters;
 
         [Header("UI Objects")]
-        public Text Printer_Text;
+        public TextMeshProUGUI Printer_Text;
 
         [Header("Audio Objects")]
         public AudioSource SEAudio;
@@ -53,7 +54,7 @@ namespace Doublsb.Dialog
         [Header("Selector")]
         public GameObject Selector;
         public GameObject SelectorItem;
-        public Text SelectorItemText;
+        public TextMeshProUGUI SelectorItemText;
 
         [HideInInspector]
         public State state;
@@ -260,7 +261,6 @@ namespace Doublsb.Dialog
             {
                 Show(Data);
                 _init_selector();
-
                 while (state != State.Deactivate) { yield return null; }
             }
         }
