@@ -24,6 +24,10 @@ public class MinigameController : MonoBehaviour
     bool _gameRunning = false;
     Transform _container;
 
+    [SerializeField] AudioSource _music;
+    [SerializeField] AudioSource _collectableAppear;
+    [SerializeField] AudioSource _gotCollectable;
+
     void Awake() {
         if (Instance == null)
             Instance = this;
@@ -39,6 +43,7 @@ public class MinigameController : MonoBehaviour
         StartCoroutine(InstanciateCollectables());
         StartCoroutine(RunTimer());
         onStartGame?.Invoke();
+        _music.Play();
     }
 
     void GameOver() {
@@ -46,6 +51,7 @@ public class MinigameController : MonoBehaviour
         PlayerPrefs.SetInt(PlayerPrefsKeys.BENDER_RESULT, _benderScore);
         _gameRunning = false;
         onGameOver?.Invoke();
+        _music.Stop();
         GameManager.Instance.GoToNextScene();
     }
 
@@ -97,6 +103,7 @@ public class MinigameController : MonoBehaviour
         GameObject collectablePrefab = _collectables[UnityEngine.Random.Range(0, _collectables.Count)];
         GameObject instance = Instantiate(collectablePrefab, randomPosition, Quaternion.identity, _container);
         instance.transform.SetAsLastSibling();
+        _collectableAppear.Play();
     }
 
     #endregion
@@ -106,15 +113,16 @@ public class MinigameController : MonoBehaviour
     int _benderScore = 0;
     public int PlayerScore { get => _playerScore; }
     public int BenderScore { get => _benderScore; }
-    public System.Action onChangeScores;
+    public System.Action<bool> onChangeScores;
     public void AddScorePlayer() {
+        _gotCollectable.Play();
         _playerScore++;
-        onChangeScores?.Invoke();
+        onChangeScores?.Invoke(true);
     }
 
     public void AddScoreBender() {
         _benderScore++;
-        onChangeScores?.Invoke();
+        onChangeScores?.Invoke(false);
     }
     #endregion
 

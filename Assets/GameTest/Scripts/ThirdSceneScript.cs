@@ -32,7 +32,7 @@ public class ThirdSceneScript : MonoBehaviour {
         var dialogTexts = new List<DialogData>();
         dialogTexts.Add(new DialogData("/emote:Happy/ I’d offer you some of my winnings, but I don’t share. Especially not with losers!", "Bender"));
         dialogTexts.Add(GetData());
-        dialogTexts.Add(new DialogData("/emote:Normal/ I’d say “better luck next time,” but let’s be honest—you’re never gonna beat me!", "Bender"));
+        dialogTexts.Add(new DialogData("/emote:Normal/ I’d say “better luck next time,” but let’s be honest you are never gonna beat me!", "Bender"));
         _dialogManager.Show(dialogTexts);
         StartCoroutine(ShowMenu());
     }
@@ -49,10 +49,12 @@ public class ThirdSceneScript : MonoBehaviour {
     }
 
     public void UI_Restart() {
+        PlayerPrefs.DeleteAll();
         SceneManager.LoadScene("FirstScene");
     }
 
     public void UI_Quit() {
+        PlayerPrefs.DeleteAll();
         Application.Quit();
     }
 }

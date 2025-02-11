@@ -35,7 +35,7 @@ public class FirstSceneScript : MonoBehaviour
                 break;
             case PlayerEmotions.SARCASTIC:
                 PlayerPrefs.SetString(PlayerPrefsKeys.FIRST_OPTION, "C");
-                ShowDialog("/emote:Angry/ Are you insinuating that I need a polishing? Listen, meat with eyes, Bender shines when you want!", "Bender");
+                ShowDialog("/emote:Angry/ Are you insinuating that I need a polishing? Listen, meat with eyes, Bender shines when he want!", "Bender");
                 break;
             default:
                 break;

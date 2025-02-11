@@ -21,6 +21,13 @@ public class UI_Score : MonoBehaviour
     [SerializeField] List<string> _benderLosingDialogs;
     [SerializeField] List<string> _benderWinningDialogs;
     bool _playing = false;
+    Animator _playerAnim;
+    Animator _benderAnim;
+
+    void Awake() {
+        _playerAnim = _playerScore.GetComponent<Animator>();
+        _benderAnim= _benderScore.GetComponent<Animator>();
+    }
 
     void OnEnable() {
         MinigameController.Instance.onChangeScores += UpdateScoreUI;
@@ -43,10 +50,10 @@ public class UI_Score : MonoBehaviour
     IEnumerator ChangeExpresions() {
         while (_playing) {
             int diff = MinigameController.Instance.PlayerScore - MinigameController.Instance.BenderScore;
-            if (diff > 5) {
+            if (diff > 2) {
                 _playerImage.sprite = _playerImageWinning;
                 _benderimage.sprite = _benderImageLosing;
-            } else if (diff < -5) {
+            } else if (diff < -2) {
                 _playerImage.sprite = _playerImageLosing;
                 _benderimage.sprite = _benderImageWinning;
             } else {
@@ -59,10 +66,10 @@ public class UI_Score : MonoBehaviour
     IEnumerator ShowComments() {
         while (_playing) {
             int diff = MinigameController.Instance.PlayerScore - MinigameController.Instance.BenderScore;
-            if (diff > 5) {
+            if (diff > 2) {
                 SecondSceneScript.Instance.ShowDialog(GetBenderLosingDialog(), "Bender");
                 yield return new WaitForSeconds(10);
-            } else if (diff < -5) {
+            } else if (diff < -2) {
                 SecondSceneScript.Instance.ShowDialog(GetBenderWinningDialog(), "Bender");
                 yield return new WaitForSeconds(10);
             } else {
@@ -90,7 +97,11 @@ public class UI_Score : MonoBehaviour
         StopAllCoroutines();
     }
 
-    void UpdateScoreUI() {
+    void UpdateScoreUI(bool isPLayer) {
+        if (isPLayer)
+            _playerAnim.SetTrigger("Bounce");
+        else
+            _benderAnim.SetTrigger("Bounce");
         _playerScore.text = MinigameController.Instance.PlayerScore.ToString();
         _benderScore.text = MinigameController.Instance.BenderScore.ToString();
     }
