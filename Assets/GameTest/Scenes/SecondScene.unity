@@ -778,7 +778,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerScore: {fileID: 175785562}
-  _benderScore: {fileID: 0}
+  _benderScore: {fileID: 625103905}
   _playerImage: {fileID: 1225704101}
   _benderimage: {fileID: 1106805302}
   _playerImageNormal: {fileID: 21300000, guid: 79c47df783da5ed4bbfe225af78d0e52, type: 3}
