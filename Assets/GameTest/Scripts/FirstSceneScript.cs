@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Doublsb.Dialog;
-using System;
 public class FirstSceneScript : MonoBehaviour
 {
     [SerializeField] DialogManager _dialogManager;
@@ -14,7 +13,7 @@ public class FirstSceneScript : MonoBehaviour
 
     void ShowFirstDialogsGroup() {
         var dialogTexts = new List<DialogData>();
-        dialogTexts.Add(new DialogData("Wow, go! Another insignificant human who wants to talk to me.", "Bender"));
+        dialogTexts.Add(new DialogData("Wow! Another insignificant human who wants to talk to me.", "Bender"));
         var firstSelection = new DialogData("What brings you here?");
         firstSelection.SelectList.Add(PlayerEmotions.FRIENDLY, "A) I just want to meet you, Bender. You are a legend.");
         firstSelection.SelectList.Add(PlayerEmotions.HOSTILE, "B) I don't know if I want to talk to a lot of scrap.");

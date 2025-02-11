@@ -39,7 +39,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: -800, y: -60}
-  m_SizeDelta: {x: 800, y: 0}
+  m_SizeDelta: {x: 800, y: 40}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &4333785385588665909
 CanvasRenderer:
@@ -62,14 +62,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.050980397, b: 0.07450981, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 55032ee68f7dd5e4eadb7879c77fd938, type: 3}
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.2
 --- !u!114 &5607006631991505356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -782,8 +782,8 @@ RectTransform:
   - {fileID: 4479359409036017967}
   m_Father: {fileID: 4094011683184477044}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.3}
-  m_AnchorMax: {x: 1, y: 0.8}
+  m_AnchorMin: {x: 0, y: 0.25}
+  m_AnchorMax: {x: 1, y: 0.75}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -40, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -880,15 +880,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1186,12 +1186,12 @@ PrefabInstance:
     - target: {fileID: 8206358605457009699, guid: b1e781a67c6f97f4d9cfb50a61f30655,
         type: 3}
       propertyPath: Emotion._sprite.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8206358605457009699, guid: b1e781a67c6f97f4d9cfb50a61f30655,
         type: 3}
       propertyPath: Emotion._emotion.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8206358605457009699, guid: b1e781a67c6f97f4d9cfb50a61f30655,
         type: 3}
@@ -1225,6 +1225,12 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 8206358605457009699, guid: b1e781a67c6f97f4d9cfb50a61f30655,
         type: 3}
+      propertyPath: Emotion._sprite.Array.data[5]
+      value: 
+      objectReference: {fileID: 21300000, guid: 2df3a9122bb50db4aa41d4313a34d61a,
+        type: 3}
+    - target: {fileID: 8206358605457009699, guid: b1e781a67c6f97f4d9cfb50a61f30655,
+        type: 3}
       propertyPath: Emotion._emotion.Array.data[1]
       value: Angry
       objectReference: {fileID: 0}
@@ -1242,6 +1248,11 @@ PrefabInstance:
         type: 3}
       propertyPath: Emotion._emotion.Array.data[4]
       value: Happy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8206358605457009699, guid: b1e781a67c6f97f4d9cfb50a61f30655,
+        type: 3}
+      propertyPath: Emotion._emotion.Array.data[5]
+      value: Waiting
       objectReference: {fileID: 0}
     - target: {fileID: 8206358605457009709, guid: b1e781a67c6f97f4d9cfb50a61f30655,
         type: 3}
