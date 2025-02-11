@@ -2,30 +2,57 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Doublsb.Dialog;
+using UnityEngine.SceneManagement;
 
-public class ThirdSceneScript : MonoBehaviour
-{
-    public DialogManager DialogManager;
+public class ThirdSceneScript : MonoBehaviour {
+    [SerializeField] GameObject _menu;
+    [SerializeField] DialogManager _dialogManager;
+    int _playerScore = 0;
+    int _benderScore = 0;
 
-    private void Awake()
-    {
+    void Awake() {
+        _playerScore = PlayerPrefs.GetInt(PlayerPrefsKeys.PLAYER_RESULT, 0);
+        _benderScore = PlayerPrefs.GetInt(PlayerPrefsKeys.BENDER_RESULT, 0);
+        if (_playerScore> _benderScore)
+            ShowPlayerWinDialog();
+        else
+            ShowPlayerLoseDialog();
+    }
+
+    void ShowPlayerWinDialog() {
         var dialogTexts = new List<DialogData>();
+        dialogTexts.Add(new DialogData("/emote:Angry/ Fine, fine, you win… but don’t turn your back on me. Ever.", "Bender"));
+        dialogTexts.Add(GetData());
+        dialogTexts.Add(new DialogData("/emote:Resigned/ Now I will develop my own video game with gambling and women.", "Bender"));
+        _dialogManager.Show(dialogTexts);
+        StartCoroutine(ShowMenu());
+    }
 
-        dialogTexts.Add(new DialogData("Here I will inform you of the results in the previous Scenes.", "Li"));
+    void ShowPlayerLoseDialog() {
+        var dialogTexts = new List<DialogData>();
+        dialogTexts.Add(new DialogData("/emote:Happy/ I’d offer you some of my winnings, but I don’t share. Especially not with losers!", "Bender"));
+        dialogTexts.Add(GetData());
+        dialogTexts.Add(new DialogData("/emote:Normal/ I’d say “better luck next time,” but let’s be honest—you’re never gonna beat me!", "Bender"));
+        _dialogManager.Show(dialogTexts);
+        StartCoroutine(ShowMenu());
+    }
+    IEnumerator ShowMenu() {
+        while (_dialogManager.state != State.Deactivate) { yield return null; }
+        _menu.SetActive(true);
+    }
 
-        dialogTexts.Add(new DialogData("You choose option A - B - C in the first scene.", "Li"));
+    DialogData GetData() {
+        string first = PlayerPrefs.GetString(PlayerPrefsKeys.FIRST_OPTION, "");
+        string second = PlayerPrefs.GetString(PlayerPrefsKeys.SECOND_OPTION, "");
+        string win = _playerScore > _benderScore ? "WIN" : "LOSE";
+        return new DialogData($"Your Choose options: {first} and {second}. Your score of the game is {_playerScore} and mine is {_benderScore}. So you {win} the game.", "Bender");
+    }
 
-        dialogTexts.Add(new DialogData("The outcome of the mini-game was 1 - 2 - 3.", "Li"));
+    public void UI_Restart() {
+        SceneManager.LoadScene("FirstScene");
+    }
 
-        dialogTexts.Add(new DialogData("So the result is of the game is A - B - C + 1 - 2 - 3.", "Li"));
-
-        dialogTexts.Add(new DialogData("And that's basically it!", "Li"));
-
-        dialogTexts.Add(new DialogData("I hope you had fun in this little test! ", "Li"));
-
-        dialogTexts.Add(new DialogData("I'm looking forward to see what you're capable of!", "Li"));
-
-        
-        DialogManager.Show(dialogTexts);
+    public void UI_Quit() {
+        Application.Quit();
     }
 }

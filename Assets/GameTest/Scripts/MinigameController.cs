@@ -42,6 +42,8 @@ public class MinigameController : MonoBehaviour
     }
 
     void GameOver() {
+        PlayerPrefs.SetInt(PlayerPrefsKeys.PLAYER_RESULT, _playerScore);
+        PlayerPrefs.SetInt(PlayerPrefsKeys.BENDER_RESULT, _benderScore);
         _gameRunning = false;
         onGameOver?.Invoke();
         GameManager.Instance.GoToNextScene();
@@ -65,6 +67,7 @@ public class MinigameController : MonoBehaviour
     }
 
     void InstanceCollectable() {
+        if (!_gameRunning) return;
         if (_collectables == null || _collectables.Count == 0) {
             Debug.LogError("No hay objetos coleccionables en la lista.");
             return;

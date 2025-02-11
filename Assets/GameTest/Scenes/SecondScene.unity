@@ -1387,7 +1387,7 @@ MonoBehaviour:
   - {fileID: 7918753976061222388, guid: 01b99e7d2f1979d43bfe334a0883369c, type: 3}
   _minTimeToInstantiate: 0.5
   _maxTimeToInstantiate: 1.5
-  _gameTimeInSeconds: 5
+  _gameTimeInSeconds: 60
 --- !u!224 &942741677
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1402,9 +1402,9 @@ RectTransform:
   m_Children:
   - {fileID: 775155072}
   - {fileID: 727583669}
-  - {fileID: 503544532}
   - {fileID: 276451442}
   - {fileID: 736806348}
+  - {fileID: 503544532}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

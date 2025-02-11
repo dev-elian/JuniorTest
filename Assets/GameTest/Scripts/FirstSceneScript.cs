@@ -26,12 +26,15 @@ public class FirstSceneScript : MonoBehaviour
         switch (_dialogManager.Result) {
 
             case PlayerEmotions.FRIENDLY:
+                PlayerPrefs.SetString(PlayerPrefsKeys.FIRST_OPTION, "A");
                 ShowDialog("I know, I know. I am the most amazing robot that has existed! Keep adulthood, I like it.", "Bender");
                 break;
             case PlayerEmotions.HOSTILE:
+                PlayerPrefs.SetString(PlayerPrefsKeys.FIRST_OPTION, "B");
                 ShowDialog("Oh, what an offensive! I don't care, because we have no feelings ... except when they don't invite me to drink.", "Bender");
                 break;
             case PlayerEmotions.SARCASTIC:
+                PlayerPrefs.SetString(PlayerPrefsKeys.FIRST_OPTION, "C");
                 ShowDialog("/emote:Angry/ Are you insinuating that I need a polishing? Listen, meat with eyes, Bender shines when you want!", "Bender");
                 break;
             default:
@@ -57,12 +60,15 @@ public class FirstSceneScript : MonoBehaviour
         switch (_dialogManager.Result) {
 
             case PlayerEmotions.POSITIVE:
+                PlayerPrefs.SetString(PlayerPrefsKeys.SECOND_OPTION, "A");
                 ShowDialog("/emote:Happy/ Ha! I like your attitude, rookie thief. But just so you know, I’m a pro.", "Bender");
                 break;
             case PlayerEmotions.FEARFUL:
+                PlayerPrefs.SetString(PlayerPrefsKeys.SECOND_OPTION, "B");
                 ShowDialog("/emote:Resigned/ Pfft! That fossil barely remembers what he had for breakfast. Besides, I’ll just say it was you.", "Bender");
                 break;
             case PlayerEmotions.NEGATIVE:
+                PlayerPrefs.SetString(PlayerPrefsKeys.SECOND_OPTION, "C");
                 ShowDialog("/emote:Waiting/ Oh wow, a goody-two-shoes. What’s next? Recycling and using eco-friendly batteries? Lame!", "Bender");
                 break;
             default:
